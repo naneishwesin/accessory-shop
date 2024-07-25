@@ -1,30 +1,37 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
+import { BsTrash } from 'react-icons/bs';
 
-import Table from 'react-bootstrap/Table';
-
-const DataTable = ({ data }) => {
-    return (
-        <Table striped bordered hover variant="dark">
-            <thead>
-                <tr>
-                      <th>ID</th>
-                      <th>Product Name</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((item, index) => (
-                    <tr key={index}>
-                     <td>{item.id}</td>
-                     <td>{item.name}</td>
-                     <td>{item.price}</td>
-                     <td>{item.qty}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </Table>
-    );
+const DataTable = ({ data, onDelete }) => {
+  return (
+    <Table striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr key={index}>
+            <td>
+              <BsTrash 
+                style={{ cursor: 'pointer' }}
+                onClick={() => onDelete(index)} 
+              />
+            </td>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
+            <td>{item.price}</td>
+            <td>{item.qty}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  );
 };
 
 export default DataTable;
